@@ -57,6 +57,11 @@ html: $(HTML_BUILD_DIR)/_static/style.css
 	$(SPHINX_BUILD) -c $(CONFIG_DIR) -b html $(SPHINXOPTS) $(SOURCE_DIR) $(HTML_BUILD_DIR)
 	@echo "Build finished."
 
+singlehtml: $(HTML_BUILD_DIR)/_static/style.css
+	@echo "Starting build..."
+	$(SPHINX_BUILD) -c $(CONFIG_DIR) -b singlehtml $(SPHINXOPTS) $(SOURCE_DIR) $(HTML_BUILD_DIR)
+	@echo "Build finished."
+
 # To call *after* `make html`
 # Binary dependencies (Debian): texlive-fonts-recommended texlive-latex-extra
 # texlive-fonts-extra
@@ -81,7 +86,7 @@ $(HTML_BUILD_DIR)/_static/style.css: extensions/odoo_theme/static/style.scss ext
 #=== Development and debugging rules ===#
 
 fast: SPHINXOPTS += -A collapse_menu=True
-fast: html
+fast: singlehtml
 
 static: $(HTML_BUILD_DIR)/_static/style.css
 	cp -r extensions/odoo_theme/static/* $(HTML_BUILD_DIR)/_static/
